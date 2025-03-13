@@ -1,0 +1,184 @@
+.quill {
+  width: 100%;
+  margin-top: 10px;
+}
+.ql-toolbar {
+  border-radius: 20px;
+  border: 0.5px solid #626262;
+  background: #fff;
+
+  display: flex;
+  height: 60px;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+.ql-formats {
+  border-right: 0.5px solid #626262;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+
+  scale: 1.3;
+  color: #333;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.ql-picker-options {
+  z-index: 10;
+}
+.ql-editor {
+  z-index: -1;
+}
+.ql-picker {
+  z-index: 10;
+}
+.ql-blank {
+  z-index: -1;
+}
+.ql-container {
+  margin-top: 10px;
+  width: 860px;
+  height: 203px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+}
+.ql-picker.ql-expanded .ql-picker-options {
+  z-index: 1000;
+}
+.ql-toolbar {
+  position: relative;
+}
+
+.selected-day {
+  background-color: green !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.weekend-day {
+  color: red !important;
+}
+.calendar-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  font-family: "Inter", sans-serif;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.saturday {
+  color: red;
+}
+
+.sunday {
+  color: red;
+}
+
+.react-datepicker {
+  border: none;
+}
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #2bb673;
+
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.custom-header button {
+  /* width: 1px; */
+  content: ("");
+  font-size: 15px;
+  /* 
+  width: 12px;
+  height: 6px; */
+  /* transform: rotate(-90deg); */
+  flex-shrink: 0;
+
+  stroke-width: 1px;
+  stroke: #333;
+}
+.react-datepicker__day-names {
+  background: #fff;
+  border-top: 0.5px solid #626262 !important;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  justify-self: center;
+
+  border-bottom: none;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.react-datepicker__header {
+  background: #fff !important;
+}
+.react-datepicker__month {
+  /* border: 0.5px solid var(--1, #626262); */
+  border-top: none;
+}
+.react-datepicker__header,
+.react-datepicker__header--custom {
+  border: none !important;
+  padding: 0 !important;
+}
+.react-datepicker__month-container {
+  color: #333;
+  font-family: Involve !important;
+  font-size: 15px !important;
+}
+.react-datepicker {
+  background: #000;
+
+  border: 2px solid var(--1, #626262);
+  border-radius: 40px;
+}

@@ -1,0 +1,388 @@
+.cont {
+  min-height: 902px;
+  height: auto;
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  width: 1300px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+}
+
+.user_list {
+  width: 1300px;
+  min-height: 424px;
+  flex-shrink: 0;
+
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+}
+.user_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.user_header_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user_header_info_1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.user_header_info_2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.user_header_info_1 p {
+  color: #333;
+  font-family: Involve;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.colvo_users {
+  width: 91px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #333;
+
+  color: #fff;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_header_info_2 p {
+  color: #333;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.user_header_heading {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-self: flex-start;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  margin-top: 27px;
+}
+
+.heading_2 {
+  margin-left: 119px;
+}
+.heading_3 {
+  margin-left: 109px;
+}
+.heading_4 {
+  margin-left: 117px;
+}
+
+.heading_5 {
+  margin-left: 36px;
+}
+.heading_6 {
+  margin-left: 48px;
+}
+.heading_7 {
+  margin-left: 48px;
+}
+.heading_8 {
+  margin-left: 155px;
+}
+.user_container {
+  margin-top: 10px;
+}
+
+.user_line {
+  width: 1220px;
+  height: 0.5px;
+  background: #626262;
+}
+.user_info {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.user_id {
+  width: 135px;
+}
+.user_name {
+  width: 218px;
+}
+.user_email {
+  width: 201px;
+}
+.user_language_cont {
+  width: 59px;
+}
+.user_language {
+  width: 22px;
+  height: 16px;
+}
+.user_status {
+  width: 140px;
+}
+.user_prem_cont {
+  width: 152px;
+}
+.user_wait {
+  width: 113px;
+}
+.buttons_cnt {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+}
+.buttons_cnt img {
+  cursor: pointer;
+}
+
+.confirm_cnt {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  background-color: #e2e2e272;
+
+  /* margin-top: 400px; */
+}
+
+.confirm {
+  min-width: 520px;
+  min-height: 300px;
+  margin-top: 400px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 60px;
+  padding-right: 60px;
+
+  background: #000;
+  position: absolute;
+
+  width: 520px;
+  height: 297px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #fff;
+  border: 0.001px solid rgba(0, 0, 0, 0.262);
+}
+.confirm h1 {
+  color: #333;
+  font-family: Involve;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.confirm_line {
+  height: 1px;
+  background: #626262;
+
+  width: 100%;
+}
+.confirm_content {
+  color: #333;
+  text-align: center;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-top: 40px;
+}
+.confirm_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.yes_btn {
+  width: 70px;
+  height: 60px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: #2272d4;
+
+  color: #fff;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.no_btn {
+  width: 70px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid #626262;
+  color: #333;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: #fff;
+}
+
+/* ds */
+
+.profile_cont {
+  margin-top: 200px;
+  min-width: 540px;
+  min-height: 570px;
+  max-height: 650px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid var(--, #e2e2e2);
+  background: #fff;
+  padding-bottom: 40px;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+  border: 0.001px solid rgba(0, 0, 0, 0.262);
+}
+.profile_content {
+  height: 484px;
+  width: 570px;
+  margin-top: -20px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+
+  flex-direction: column;
+
+  /* background: #0022; */
+}
+.profile_first_line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile_h1 {
+  color: #333;
+  font-family: Involve;
+  font-size: 24px;
+  padding-bottom: 100px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  text-align: center;
+}
+.profile_ico {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.profile_line {
+  width: 560px;
+  height: 0.5px;
+  background: #6a6a6a;
+  margin-top: 20px;
+}
+.profile_form {
+  width: 365px;
+  height: 340px;
+  justify-self: center;
+  /* background: #0333; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input_cnt {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.profile_input {
+  width: 365px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 0.5px solid #626262;
+  background: #fff;
+  padding-left: 30px;
+  color: #6a6a6a;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.change_btn {
+  width: 365px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  border: 1px solid #333;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+
+  color: #626262;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.edit_role {
+  align-self: center;
+}
+/* ds */

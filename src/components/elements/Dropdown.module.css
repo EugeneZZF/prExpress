@@ -1,0 +1,126 @@
+.dropdown {
+  position: relative;
+  width: 400px;
+
+  flex-shrink: 0;
+}
+
+.button {
+  width: 100%;
+  /* padding: 0.5rem; */
+  height: 50px;
+  border: 1px solid #ccc;
+  /* border-radius: 0.5rem; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  cursor: pointer;
+
+  border-radius: 20px;
+  border: 0.5px solid #626262;
+  background: #fff;
+
+  padding: 15px 30px;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownContent {
+  position: absolute;
+  width: 100%;
+  margin-top: 0.5rem;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  z-index: 10;
+
+  padding-left: 10px;
+
+  width: 400px;
+  height: 206px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 0.5px solid #626262;
+  background: #fff;
+  box-shadow: 4px 4px 4px 0px rgba(196, 194, 194, 0.25);
+}
+
+.list {
+  max-height: 12rem;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.item {
+  display: flex;
+  align-items: start;
+
+  /* justify-content: start; */
+  gap: 15px;
+  padding: 5px;
+  cursor: pointer;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.item span {
+  max-width: 220px;
+}
+.check {
+  /* margin-top: 7px; */
+}
+.item:hover {
+  background-color: #f9f9f9;
+}
+
+.chevron {
+  transition: transform 0.4s ease-in-out;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+/* Стилизация скроллбара */
+.dropdownContent {
+  /* max-height: 200px; Ограничение высоты */
+  overflow-y: auto; /* Вертикальный скролл */
+}
+
+/* Стиль для всей полосы прокрутки */
+.dropdownContent::-webkit-scrollbar {
+  width: 6px; /* Ширина скроллбара */
+}
+
+/* Трек (фон скроллбара) */
+.dropdownContent::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Серый фон */
+  border-radius: 10px; /* Закругление */
+}
+
+/* Ползунок */
+.dropdownContent::-webkit-scrollbar-thumb {
+  background: #22c55e; /* Зеленый цвет */
+  border-radius: 10px;
+  border: 2px solid white; /* Обводка, создающая эффект круга */
+}
+
+/* При наведении */
+.dropdownContent::-webkit-scrollbar-thumb:hover {
+  background: #1aa34a; /* Чуть темнее при наведении */
+}

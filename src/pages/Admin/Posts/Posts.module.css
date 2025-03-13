@@ -1,0 +1,163 @@
+.cont {
+  min-height: 660px;
+  height: auto;
+  flex: 1;
+  display: flex;
+  /* justify-content: space-around; */
+  justify-content: center;
+  gap: 30px;
+  width: 1300px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+
+  /* flex-direction: column; */
+  /* align-items: center; */
+}
+
+.left_side {
+  display: flex;
+  align-items: center;
+  width: 310px;
+  /* background: #00000025; */
+  /* justify-content: center; */
+  flex-direction: column;
+}
+
+.category_sort {
+  width: 310px;
+  height: 324px;
+
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+
+  padding: 20px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  text-wrap: nowrap;
+}
+.category_select {
+  width: 310px;
+  height: 347px;
+  flex-shrink: 0;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+
+  padding: 20px 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 20px;
+}
+.category_sort_title {
+  color: #333;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.category_sort_line {
+  width: 100%;
+  height: 0.5px;
+
+  background: #6a6a6a;
+  margin-top: 10px;
+}
+.checkbox_cnt {
+  display: flex;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  /* max-width: 200px; */
+  align-items: start;
+
+  position: relative;
+}
+.category_sort_checkbox {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.checkbox_cnt {
+  gap: 10px;
+}
+.checkbox_cnt img {
+  position: absolute;
+  right: 0;
+  justify-self: end;
+  /* margin-left: 96px; */
+}
+.sort_btn {
+  display: flex;
+  height: 50px;
+  padding: 14px 81px 15px 81px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color: #fff;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 40px;
+  background: #2272d4;
+  margin-top: 30px;
+}
+
+.right_side_cnt {
+  width: 970px;
+  min-height: 750px;
+  flex-shrink: 0;
+
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 20px;
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.card_id_title {
+  width: 120px;
+}
+.card_username_title {
+  width: 170px;
+}
+.card_name_title {
+  width: 214px;
+}
+.card_language_title {
+  width: 78px;
+}
+.card_cost_title {
+  width: 139px;
+}
+.card_data_title {
+  width: 113px;
+}

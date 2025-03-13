@@ -1,0 +1,13 @@
+.cont{
+    flex: 1;
+    height: 1000px;
+    background: #002a;
+    width: 1300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cont button{
+    margin-left: 40px;
+}

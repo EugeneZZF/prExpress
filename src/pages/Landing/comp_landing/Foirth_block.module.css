@@ -1,0 +1,369 @@
+.container {
+  width: 1300px;
+  height: 1608px;
+
+  align-self: center;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+.cont {
+  text-align: center;
+  margin: 20px;
+}
+
+.sliderContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.slickList {
+  display: flex;
+  flex-direction: column;
+}
+
+.review {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  width: 420px;
+  height: 412px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 4px 4px 4px 0px rgba(186, 186, 186, 0.25);
+}
+.review h3 {
+  margin-top: 30px;
+  color: #333;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: capitalize;
+}
+.review p {
+  margin-top: 10px;
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+  letter-spacing: 0.48px;
+}
+
+.stars {
+  width: 142px;
+  height: 29px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  width: 30px;
+  cursor: pointer;
+}
+
+.otz {
+  color: #626262;
+  font-family: "Halvar Breitschrift";
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  display: flex;
+  gap: 25px;
+}
+.otz2 {
+  margin-top: 84px;
+  color: #626262;
+  font-family: "Halvar Breitschrift";
+  font-size: 65px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 43px;
+}
+.cont_p_otz {
+  width: 262px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  border: 1px solid #333;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  text-align: center;
+  font-family: Involve;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.accordion {
+  width: 1300px;
+  margin: 0 auto;
+  background: #646464;
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.accordionItem {
+  border-bottom: 1px solid #646464;
+}
+.top_accordionitem {
+  border-top: 1px solid #646464;
+}
+.accordionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 94px;
+  padding: 20px;
+  cursor: pointer;
+  /* background-color: #1c1c1c; */
+  background: #f9f9f9;
+  transition: background-color 0.3s ease;
+  color: #333;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.accordionItem_cont {
+  display: flex;
+  width: 1200px;
+
+  justify-content: space-between;
+  color: #333;
+  font-family: Involve;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.accordionTitle:hover {
+  background-color: white;
+}
+.accordionTitle.active {
+  background-color: white;
+  border-radius: 20px 20px 0px 0px;
+}
+.accordionTitle h2 {
+  margin: 0;
+  color: #0066cc;
+  color: #1764db;
+  font-family: "Halvar Breitschrift";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.accordionContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+
+  border-radius: 0px 0px 20px 20px;
+  background: #fff;
+  /* box-shadow: 4px 4px 4px 0px rgba(186, 186, 186, 0.25); */
+
+  /* display: flex */
+}
+.content_cont {
+  width: 569px;
+  height: auto;
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+  letter-spacing: 0.48px;
+  margin-top: 15px;
+  width: 1023px;
+  /* justify-self: center; */
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+  letter-spacing: 0.48px;
+  align-self: center;
+  text-align: start;
+}
+
+.accordionContent {
+  /* visibility: hidden; */
+}
+.accordionContent.active {
+  max-height: 400px; /* Adjust according to the content */
+  padding: 20px;
+  padding-top: 0;
+  /* visibility: visible; */
+  /* justify-content: center; */
+}
+.accordionContent_line {
+  width: 0px;
+
+  position: absolute;
+  height: 1px;
+  background: #333;
+
+  justify-self: center;
+  transition: width 1s ease-out;
+}
+
+.accordionContent_line {
+  /* visibility: hidden; */
+}
+.accordionContent_line.active {
+  width: calc(100% - 40px);
+  /* visibility: visible; */
+}
+
+.accordionContent_img {
+  position: absolute;
+  width: 81px;
+  height: 76.713px;
+  flex-shrink: 0;
+  right: 0;
+  /* top: 50%; */
+  margin-top: 30px;
+  margin-right: 65px;
+  width: 0px;
+  height: 0px;
+  scale: 0;
+
+  transition: scale 0.7s ease-in-out;
+}
+.accordionItem {
+  background: #f9f9f9;
+}
+.accordionContent_img.active {
+  scale: 1;
+  width: 81px;
+  height: 76.713px;
+}
+.h2 {
+  color: #1764db;
+  font-family: "Halvar Breitschrift";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.accordion_arrow {
+  transition: transform 0.5s ease;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.accordion_top_cont {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 350px;
+  padding-bottom: 30px;
+  margin-top: 70px;
+}
+.order_cont {
+  display: inline-flex;
+  height: 50px;
+  padding: 14px 43px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  border: 0.5px solid #646464;
+  background: #1c1c1c;
+  color: #fff;
+  text-align: center;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.accordion_top_cont_h1 {
+  color: #fff;
+  font-family: "Halvar Breitschrift";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.write_btn {
+  width: 248px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 40px;
+  background: #2272d4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 50px;
+}
+.write_btn_p {
+  color: #fff;
+  font-family: Involve;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.line {
+  width: 100%;
+  height: 70px;
+  flex-shrink: 0;
+
+  border-radius: 40px 40px 0px 0px;
+  background: #f9f9f9;
+  position: absolute;
+  bottom: 0;
+}

@@ -1,0 +1,22 @@
+.cont_date {
+  /* background: white; */
+  opacity: 1;
+
+  z-index: 999;
+  margin-top: 300px;
+  width: 221px;
+  margin-right: 20px;
+}
+
+.selected-day {
+  background-color: green !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.weekend-day {
+  color: red;
+}
+.cont_date {
+  position: absolute;
+}
