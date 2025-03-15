@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { getDecode } from "../services";
 import { useEffect } from "react";
+import { getUser } from "../services";
 
 export default function Layout() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -12,15 +13,22 @@ export default function Layout() {
   const [notifications, setnotifications] = useState(false);
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [userToken, setUserToken] = useState({});
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
-  useEffect(() => {
-    const user = getDecode();
+  async function getUserObject(user_id) {
+    const user = await getUser(user_id);
     setUserInfo(user);
-    console.log("user", userInfo);
+  }
+
+  useEffect(() => {
+    const user_id = getDecode();
+    setUserToken(user_id);
+    getUserObject(user_id.id);
+    console.log("user ti", userToken);
 
     const socket = new WebSocket("wss://prexpress.io");
 
@@ -55,11 +63,11 @@ export default function Layout() {
         </div>
         <div className={styles.nav_cont}>
           <div className={styles.nav_link}>
-            {userInfo?.role === "admin" ? (
-              <Link to={"./admin"} className={styles.nav_site_link}>
-                Админ Панель
+            {userInfo?.role?.name === "admin" && (
+              <Link to="/admin" className={styles.nav_site_link}>
+                Админ-панель
               </Link>
-            ) : null}
+            )}
 
             <Link to={"./resources"} className={styles.nav_site_link}>
               Ресурсы
@@ -76,7 +84,7 @@ export default function Layout() {
           </div>
           <div className={styles.nav_profile_link}>
             <div className={styles.nav_line}></div>
-            <Link className={styles.nav_site_link}>Антон Орлов</Link>
+            <Link className={styles.nav_site_link}>{userInfo?.name}</Link>
           </div>
         </div>
         <button className={styles.change_language}>

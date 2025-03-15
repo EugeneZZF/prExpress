@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 
 const accesstoken = Cookies.get("token");
 const URL = "https://prexpress.io";
+// const URL = "http://localhost:8000";
 
 export function handleCreateId() {
   function s4() {
@@ -213,6 +214,31 @@ export async function verifyResource(resource_id) {
     } else {
       console.error("Error verifying resource:", error.message);
     }
+
+    return null;
+  }
+}
+
+export async function uploadFormData(form) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("Access token is missing.");
+    return null;
+  }
+
+  try {
+    const response = await axios.post(`${URL}/upload/`, form, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log("Resource verified successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
 
     return null;
   }

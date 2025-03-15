@@ -40,6 +40,7 @@ export default function Modal({
   // };
 
   const URL = "https://prexpress.io";
+  // const URL = "localhost:8000";
 
   useEffect(() => {
     fetch("https://ipapi.co/json/")

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Settings.module.css";
 
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { getDecode } from "../../components/services";
 
@@ -22,9 +22,9 @@ export default function Settings() {
 
   const URL = "https://prexpress.io";
 
-  const isWalletFormValid = address && token && login && password;
-  const isProfileFormValid =
-    name && phone && email && profilePassword && confirmPassword;
+  // const isWalletFormValid = address && token && login && password;
+  // const isProfileFormValid =
+  //   name && phone && email && profilePassword && confirmPassword;
 
   const navigate = useNavigate();
   const validateInputs = () => {
@@ -291,7 +291,7 @@ export default function Settings() {
             <div className={styles.profile_line}></div>
             <form
               className={styles.profile_form}
-              onSubmit={handleUpdateProfile}
+              // onSubmit={handleUpdateProfile}
             >
               <img className={styles.edit_ico}></img>
               <div className={styles.input_cnt}>
@@ -358,7 +358,7 @@ export default function Settings() {
               </div>
               <button
                 className={styles.change_btn}
-                onClick={(e) => updateProfile(e.target.value)}
+                onClick={(e) => updateProfile(e)}
                 type="submit"
               >
                 Изменить
