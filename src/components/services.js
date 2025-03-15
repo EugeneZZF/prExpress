@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 // import { jwtDecode } from "jwt-decode";
 const URL = "https://prexpress.io";
+// const URL = "http://localhost:8000";
 
 export function getDecode() {
   const accessToken = Cookies.get("token");
@@ -29,7 +30,7 @@ export async function getUserInfo(accesstoken, name, phone, email, password) {
     };
 
     const response = await axios.post(
-      "http://api.prexpress.pro/Client/UpdateProfile",
+      `${URL}/Client/UpdateProfile`,
       { name, phone, email, password },
       config
     );

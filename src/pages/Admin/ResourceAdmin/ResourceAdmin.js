@@ -21,6 +21,7 @@ export default function ResourceAdmin() {
   const navigate = useNavigate();
   const accesstoken = Cookies.get("token");
   const URL = "https://prexpress.io";
+  // const URL = "http://localhost:8000";
 
   const [statusRes, setStatusRes] = useState("");
   const [searchQuery, setSearchQuery] = useState("");

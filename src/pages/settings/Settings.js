@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./Settings.module.css";
 
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { getDecode } from "../../components/services";
 
@@ -22,9 +22,9 @@ export default function Settings() {
 
   const URL = "https://prexpress.io";
 
-  const isWalletFormValid = address && token && login && password;
-  const isProfileFormValid =
-    name && phone && email && profilePassword && confirmPassword;
+  // const isWalletFormValid = address && token && login && password;
+  // const isProfileFormValid =
+  //   name && phone && email && profilePassword && confirmPassword;
 
   const navigate = useNavigate();
   const validateInputs = () => {

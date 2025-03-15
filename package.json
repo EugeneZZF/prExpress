@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@grpc/grpc-js": "^1.12.2",
     "@radix-ui/react-checkbox": "^1.1.4",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -13,9 +12,6 @@
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.1",
     "date-fns": "^4.1.0",
-    "google-protobuf": "^3.21.4",
-    "grpc-tools": "^1.12.4",
-    "grpc-web": "^1.5.0",
     "https-browserify": "^1.0.0",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.0.0",
@@ -27,7 +23,6 @@
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
-    "protobufjs": "^7.4.0",
     "quill-emoji": "^0.2.0",
     "rc-slider": "^11.1.6",
     "react": "^18.3.1",
@@ -52,8 +47,7 @@
     "start": "react-scripts start",
     "build": "webpack --mode production",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "proto:js": "pbjs -t static-module -w commonjs -o ./src/proto_bundle.js ./proto/*.proto && pbts -o ./src/proto_bundle.d.ts ./src/proto_bundle.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -79,7 +73,6 @@
     "@babel/preset-env": "^7.25.8",
     "@babel/preset-react": "^7.25.7",
     "babel-loader": "^9.2.1",
-    "grpc_tools_node_protoc_ts": "^5.3.3",
     "node-polyfill-webpack-plugin": "^4.0.0",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
