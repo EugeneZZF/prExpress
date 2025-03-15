@@ -218,3 +218,28 @@ export async function verifyResource(resource_id) {
     return null;
   }
 }
+
+export async function uploadFormData(form) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("Access token is missing.");
+    return null;
+  }
+
+  try {
+    const response = await axios.post(`${URL}/upload/`, form, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log("Resource verified successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+
+    return null;
+  }
+}

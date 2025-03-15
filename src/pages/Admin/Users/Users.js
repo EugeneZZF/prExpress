@@ -59,10 +59,10 @@ export default function Users() {
   const fetchUsers = async (pageNum) => {
     const userInfo = getDecode();
 
-    if (userInfo.role !== "user") {
-      navigate("/");
-      return;
-    }
+    // if (userInfo.role !== "user") {
+    //   navigate("/");
+    //   return;
+    // }
 
     try {
       const newAmount = await getAmount();

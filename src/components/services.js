@@ -63,7 +63,7 @@ export async function getUser(userId) {
 
     const response = await axios.get(`${URL}/users/${userId}`, config);
 
-    // console.log("User Data:", response.data);
+    console.log("User Data:", response.data);
     return response.data;
   } catch (error) {
     console.error("Fetching Users Error:", error);
@@ -214,4 +214,40 @@ export async function searchResources(
   }
 }
 
-export async function fetchPosts(params) {}
+export async function notificationsSend(title, text, checkboxes) {
+  const accesstoken = Cookies.get("token");
+  if (!accesstoken) {
+    console.error("Error: No access token found.");
+    return null;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accesstoken}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    const payload = {
+      options: checkboxes,
+      name: title.trim(),
+      description: text.trim(),
+    };
+
+    const response = await axios.post(
+      `${URL}/notifications/broadcast`,
+      payload,
+      config
+    );
+
+    console.log("Notification sent successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error sending notification:",
+      error.response ? error.response.data : error.message
+    );
+    return null;
+  }
+}

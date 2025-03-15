@@ -3,9 +3,43 @@ import styles from "./Dispatch.module.css";
 import Checkbox from "../../Landing/comp_landing/Checkbox";
 import ReactQuill from "react-quill";
 import { useState } from "react";
+import { notificationsSend } from "../../../components/services";
 
 export default function Dispatch() {
   const [text, setText] = useState("");
+  const [title, setTitle] = useState("");
+  const [checkboxes, setCheckboxes] = useState({
+    all: false,
+    premium: false,
+    owners: false,
+    user: false,
+    online: false,
+  });
+
+  const handleCheckboxChange = (name) => {
+    setCheckboxes((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name],
+    }));
+  };
+
+  async function DispatchNotifucatuiins(e) {
+    e.stopPropagation();
+    console.log(title);
+    console.log(text);
+    // notificationsSend(title, text, checkboxes);
+    const options = Object.keys(checkboxes).filter((key) => checkboxes[key]);
+
+    if (options.length <= 0) {
+      alert("Выберите хотя бы один вариант рассылки!");
+    } else if (!title.trim()) {
+      alert("Поле 'Название поста' не должно быть пустым");
+    } else if (!text.trim()) {
+      alert("Поле 'Описание' не должно быть пустым");
+    } else {
+      notificationsSend(title, text, options);
+    }
+  }
 
   const formats = [
     "header",
@@ -48,40 +82,40 @@ export default function Dispatch() {
             <div className={styles.checkbox_cnt}>
               <Checkbox
                 label="Все"
-                // isChecked={checkboxes.all}
-                // onChange={handleAllChange}
+                isChecked={checkboxes.all}
+                onChange={() => handleCheckboxChange("all")}
               />
               Все
             </div>
             <div className={styles.checkbox_cnt}>
               <Checkbox
-                label="Все"
-                // isChecked={checkboxes.all}
-                // onChange={handleAllChange}
+                label="Премиум пользователи"
+                isChecked={checkboxes.premium}
+                onChange={() => handleCheckboxChange("premium")}
               />
               Премиум пользователи
             </div>
             <div className={styles.checkbox_cnt}>
               <Checkbox
-                label="Все"
-                // isChecked={checkboxes.all}
-                // onChange={handleAllChange}
+                label="Владельцы ресурсов"
+                isChecked={checkboxes.owners}
+                onChange={() => handleCheckboxChange("owner")}
               />
               Владельцы ресурсов
             </div>
             <div className={styles.checkbox_cnt}>
               <Checkbox
-                label="Все"
-                // isChecked={checkboxes.all}
-                // onChange={handleAllChange}
+                label="Стандартные пользователи"
+                isChecked={checkboxes.standard}
+                onChange={() => handleCheckboxChange("user")}
               />
               Стандартные пользователи
             </div>
             <div className={styles.checkbox_cnt}>
               <Checkbox
-                label="Все"
-                // isChecked={checkboxes.all}
-                // onChange={handleAllChange}
+                label="Сейчас онлайн"
+                isChecked={checkboxes.online}
+                onChange={() => handleCheckboxChange("online")}
               />
               Сейчас онлайн
             </div>
@@ -90,7 +124,12 @@ export default function Dispatch() {
         </div>
       </div>
       <div className={styles.right_side}>
-        <input className={styles.title} placeholder="Название поста"></input>
+        <input
+          className={styles.title}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Название поста"
+        ></input>
         <ReactQuill
           theme="snow"
           value={text}
@@ -102,7 +141,12 @@ export default function Dispatch() {
           }}
           placeholder="Описание..."
         />
-        <button className={styles.send_button}>Отправить</button>
+        <button
+          className={styles.send_button}
+          onClick={(e) => DispatchNotifucatuiins(e)}
+        >
+          Отправить
+        </button>
       </div>
     </div>
   );

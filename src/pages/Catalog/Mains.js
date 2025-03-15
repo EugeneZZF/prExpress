@@ -6,7 +6,11 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { getDecode } from "../../components/services";
 
-import { deleteResource, getResurceUser } from "./MainsServices";
+import {
+  deleteResource,
+  getResurceUser,
+  uploadFormData,
+} from "./MainsServices";
 
 export default function Mains() {
   const accesstoken = Cookies.get("token");
@@ -87,6 +91,7 @@ export default function Mains() {
   // const [error, setError] = useState(null);
 
   const [received, setReceived] = useState([]);
+  const [formDataISO, setFormDataISO] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -162,10 +167,8 @@ export default function Mains() {
   const handleCreateResource = async (e) => {
     e.preventDefault();
     const inputErrors = validateInputs();
-
     const categories = [];
     const keys = Object.keys(checkboxes);
-    console.log(checkboxes);
 
     keys.forEach((key, index) => {
       if (key !== "all" && checkboxes[key]) {
@@ -260,6 +263,19 @@ export default function Mains() {
     }
   };
 
+  const handleUploadImage = async (e) => {
+    e.stopPropagation();
+    const isEmpty = [...formDataISO.entries()].length;
+    // console.log(isEmpty);
+    // for (const [key, value] of formDataISO.entries()) {
+    //   console.log(key, value);
+    // }
+    if (isEmpty) {
+      uploadFormData(formDataISO);
+    }
+    // console.log("form ", formDataISO);
+  };
+
   const handleDragOver = (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -272,6 +288,11 @@ export default function Mains() {
     handleFileUpload(file);
   };
 
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    handleFileUpload(file);
+  };
+
   const handleFileUpload = (file) => {
     if (file) {
       const reader = new FileReader();
@@ -279,12 +300,14 @@ export default function Mains() {
         setUploadedImage(e.target.result);
       };
       reader.readAsDataURL(file);
-    }
-  };
 
-  const handleFileSelect = (event) => {
-    const file = event.target.files[0];
-    handleFileUpload(file);
+      const formDatas = new FormData();
+      console.log("form1: ", formDatas);
+      formDatas.append("image", file);
+      console.log("form2: ", formDatas.get);
+
+      setFormDataISO(formDatas);
+    }
   };
 
   const handleContainerClick = () => {
@@ -525,7 +548,10 @@ export default function Mains() {
             </div>
             <button
               className={styles.synchronization_btn}
-              onClick={(e) => handleSynchronization(e)}
+              onClick={(e) => {
+                handleSynchronization(e);
+                // handleUploadImage(e);
+              }}
               // style={statusEdit ? { display: "none" } : {}}
             >
               Синхронизация
@@ -548,7 +574,14 @@ export default function Mains() {
           <div className={styles.search_info}>
             <div className={styles.card_catalog}>
               <div className={styles.serach_first_info}>
-                <p className={styles.search_header_name_1}>Название</p>
+                <p
+                  className={styles.search_header_name_1}
+                  onClick={(e) => {
+                    handleUploadImage(e);
+                  }}
+                >
+                  Название
+                </p>
                 <p className={styles.search_header_name_2}>Категории</p>
                 <p className={styles.search_header_name_3}>Язык</p>
                 <p className={styles.search_header_name_4}>Ссылка</p>

@@ -291,7 +291,7 @@ export default function Settings() {
             <div className={styles.profile_line}></div>
             <form
               className={styles.profile_form}
-              onSubmit={handleUpdateProfile}
+              // onSubmit={handleUpdateProfile}
             >
               <img className={styles.edit_ico}></img>
               <div className={styles.input_cnt}>
@@ -358,7 +358,7 @@ export default function Settings() {
               </div>
               <button
                 className={styles.change_btn}
-                onClick={(e) => updateProfile(e.target.value)}
+                onClick={(e) => updateProfile(e)}
                 type="submit"
               >
                 Изменить
