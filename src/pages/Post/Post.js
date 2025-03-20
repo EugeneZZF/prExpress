@@ -4,7 +4,7 @@ import ReactQuill, { Quill } from "react-quill";
 import styles from "./Post.module.css";
 import "./quill.css";
 import { useNavigate } from "react-router-dom";
-import { getResurceUser } from "../Catalog/MainsServices";
+import { getResurceUser, uploadFormData } from "../Catalog/MainsServices";
 import axios from "axios";
 import { getDecode } from "../../components/services.js";
 
@@ -31,6 +31,7 @@ export default function Post() {
 
   const [post_name, setPostName] = useState("");
   const [text, setText] = useState("");
+  const [formDataISO, setFormDataISO] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [time, setTime] = useState({ hours: "12", minutes: "30" });
   const containerRef = useRef(null);
@@ -85,26 +86,49 @@ export default function Post() {
     "video",
   ];
 
+  const handleUploadImage = async () => {
+    const isEmpty = [...formDataISO.entries()].length;
+    if (isEmpty) {
+      const image = await uploadFormData(formDataISO);
+
+      console.log(image.filename);
+      return image.filename;
+    }
+    // console.log("form ", formDataISO);
+  };
+
   const handleDragOver = (event) => {
     event.preventDefault();
+    event.stopPropagation();
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     const file = event.dataTransfer.files[0];
     handleFileUpload(file);
-  };
-
-  const handleFileUpload = (file) => {
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setUploadedImage(imageUrl);
-    }
   };
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     handleFileUpload(file);
+  };
+
+  const handleFileUpload = (file) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setUploadedImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+
+      const formDatas = new FormData();
+      console.log("form1: ", formDatas);
+      formDatas.append("image", file);
+      console.log("form2: ", formDatas.get);
+
+      setFormDataISO(formDatas);
+    }
   };
 
   const handleContainerClick = () => {
@@ -172,6 +196,7 @@ export default function Post() {
   // }
 
   const handleCreateResource = async () => {
+    const image = await handleUploadImage();
     try {
       const config = {
         headers: {
@@ -213,7 +238,7 @@ export default function Post() {
         name: post_name,
         description: text,
         author: author,
-        image: uploadedImage,
+        image: image,
         date: isoString,
 
         user_id: id,

@@ -42,6 +42,14 @@ export default function AdminPanel() {
         >
           Посты
         </div>
+        <div
+          className={styles.res_btn}
+          onClick={() => {
+            navigate("./stats");
+          }}
+        >
+          Статистика
+        </div>
       </div>
     </div>
   );

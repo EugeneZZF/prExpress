@@ -11,7 +11,7 @@ export function getDecode() {
   if (accessToken) {
     const decoded = jwtDecode(accessToken);
     // console.log(decoded, "decoccccc");
-    console.log(decoded);
+    // console.log(decoded);
     return decoded;
   } else {
     console.error("Токен отсутствует.");
@@ -47,7 +47,6 @@ export async function getUserInfo(accesstoken, name, phone, email, password) {
 
 export async function getUser(userId) {
   const accessToken = Cookies.get("token");
-  // console.log("Access Token:", accessToken);
 
   if (!accessToken) {
     console.error("No access token found!");
@@ -81,7 +80,6 @@ export async function getUsers(
   role
 ) {
   const accessToken = Cookies.get("token");
-  console.log("Access Token:", accessToken);
 
   if (!accessToken) {
     console.error("No access token found!");
@@ -249,5 +247,130 @@ export async function notificationsSend(title, text, checkboxes) {
       error.response ? error.response.data : error.message
     );
     return null;
+  }
+}
+
+export async function getPosts(
+  page = 1,
+  size = 10,
+  search = "",
+  user_id,
+  status,
+  sort_by = "date",
+  sort_order = "desc"
+) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        page,
+        size,
+        search,
+        user_id,
+        status,
+        sort_by,
+        sort_order,
+      },
+    };
+
+    const response = await axios.get(`${URL}/posts/`, config);
+
+    console.log("Server Response:", response.data.items);
+    return response.data.items;
+  } catch (error) {
+    console.error("Fetching Posts Error:", error);
+  }
+}
+
+export async function statsUsers() {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      // params: {
+      // },
+    };
+
+    const response = await axios.get(`${URL}/statistics/users`, config);
+
+    console.log("Server Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Fetching Posts Error:", error);
+  }
+}
+
+export async function financialsUser(user_id) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      // params: {
+      // },
+    };
+
+    const response = await axios.get(
+      `${URL}/statistics/financials/${user_id}`,
+      config
+    );
+
+    console.log("Server Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Fetching Posts Error:", error);
+  }
+}
+
+export async function statsUser(user_id) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      // params: {
+      // },
+    };
+
+    const response = await axios.get(
+      `${URL}/statistics/posts_resources/${user_id}`,
+      config
+    );
+
+    console.log("Server Response:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Fetching Posts Error:", error);
   }
 }
