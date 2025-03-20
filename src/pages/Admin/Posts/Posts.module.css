@@ -144,6 +144,7 @@
   line-height: normal;
 }
 .card_id_title {
+  margin-left: 14px;
   width: 120px;
 }
 .card_username_title {
@@ -160,4 +161,123 @@
 }
 .card_data_title {
   width: 113px;
+}
+
+.card_cont {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 20px;
+  gap: 15px;
+}
+
+.post_cont {
+  width: 930px;
+  height: 156px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 20px;
+  background: #f9f9f9;
+  padding: 20px;
+}
+.post_first_line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  color: var(--, #333);
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.flag_post {
+  width: 22px;
+}
+.post_status {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.post_id {
+  width: 118px;
+}
+.post_author {
+  width: 172px;
+}
+.post_name p {
+  font-size: 14px;
+  width: 165px;
+}
+.post_name {
+  width: 215px;
+}
+.post_language {
+  width: 85px;
+}
+.post_price {
+  width: 127px;
+}
+.post_date p {
+  width: 80px;
+}
+.post_date {
+  width: 130px;
+}
+.post_line {
+  width: 890px;
+  height: 0.5px;
+  background: #6a6a6a;
+  margin-top: 25px;
+}
+.post_second_line {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+
+  padding-top: 20px;
+  padding-right: 22px;
+}
+.post_actions_title {
+  width: 112px;
+}
+.actions_cnt {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.actions_cnt img {
+  cursor: pointer;
+}
+.actions_chat {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.actions_new_res {
+  width: 18px;
+  height: 18.004px;
+  flex-shrink: 0;
+}
+.actions_info {
+  width: 20px;
+  height: 17.087px;
+  flex-shrink: 0;
+}
+.actions_edit {
+  width: 18px;
+  height: 18.5px;
+  flex-shrink: 0;
+}
+.actions_trash {
+  width: 20px;
+  height: 20.5px;
+  flex-shrink: 0;
 }

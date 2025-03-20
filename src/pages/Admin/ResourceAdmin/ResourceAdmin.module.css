@@ -371,10 +371,6 @@ input {
   margin-top: 10px;
   z-index: 2;
 }
-.card {
-  display: flex;
-  flex-direction: column;
-}
 .card_info {
   margin-top: 40px;
   display: flex;
@@ -412,9 +408,10 @@ input {
 .card {
   width: 100%;
   display: flex;
+  flex-direction: column;
 
   width: 910px;
-  height: 60px;
+  height: auto;
   flex-shrink: 0;
   border-radius: 20px;
   background: #f9f9f9;
@@ -422,7 +419,7 @@ input {
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 20px;
-  padding-bottom: 35px;
+  padding-bottom: 10px;
 }
 .res_info {
   display: flex;
@@ -469,10 +466,13 @@ input {
 }
 
 .card {
-  transition: height 0.5s ease;
+  height: auto;
+  max-height: 70px;
+  transition: max-height 1s ease, padding-bottom 0.8s ease;
 }
 .card.active {
-  height: 345px;
+  max-height: 1000px;
+  padding-bottom: 35px;
 }
 .res_line {
   width: 100%;
@@ -493,11 +493,13 @@ input {
   transform: translateY(-10px);
   max-height: 0;
   overflow: hidden;
+  visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
 }
 
 .res_other.active {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
   max-height: 500px; /* Достаточно большое значение */
 }

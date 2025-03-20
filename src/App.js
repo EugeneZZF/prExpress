@@ -19,6 +19,7 @@ import AdminPanel from "./pages/Admin/AdminPanel/AdminPanel";
 import Dispatch from "./pages/Admin/Dispatch/Dispatch";
 import Posts from "./pages/Admin/Posts/Posts";
 import PostEdit from "./pages/Admin/PostEdit/PostEdit";
+import Stats from "./pages/Admin/Stats/Stats";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/admin/dispatch" element={<Dispatch />} />
           <Route path="/admin/posts" element={<Posts></Posts>} />
           <Route path="/admin/postedit" element={<PostEdit></PostEdit>} />
+          <Route path="/admin/stats" element={<Stats />} />
 
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/settings" element={<Settings />} />

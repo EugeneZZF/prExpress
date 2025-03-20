@@ -28,9 +28,8 @@ export default function Layout() {
     const user_id = getDecode();
     setUserToken(user_id);
     getUserObject(user_id.id);
-    console.log("user ti", userToken);
 
-    const socket = new WebSocket("wss://prexpress.io");
+    const socket = new WebSocket(`wss://prexpress.io/ws/${user_id.id}`);
 
     socket.onopen = () => {
       console.log("WebSocket подключен");
@@ -63,7 +62,7 @@ export default function Layout() {
         </div>
         <div className={styles.nav_cont}>
           <div className={styles.nav_link}>
-            {userInfo?.role?.name === "admin" && (
+            {userInfo?.role?.name !== "admin" && (
               <Link to="/admin" className={styles.nav_site_link}>
                 Админ-панель
               </Link>

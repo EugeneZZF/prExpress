@@ -180,7 +180,7 @@ export default function Mains() {
     });
 
     console.log("cat ", categories);
-
+    const image = await handleUploadImage();
     if (Object.keys(inputErrors).length === 0) {
       if (!statusEdit) {
         try {
@@ -198,7 +198,7 @@ export default function Mains() {
             {
               language: resourceLanguage == "ru" ? "ru" : "en",
               name: resourceName,
-              image: uploadedImage,
+              image: image,
               link: resourceUri,
               description: resourceDescription,
               price_for_pub: Number(resourcePrice),
@@ -227,21 +227,17 @@ export default function Mains() {
             },
           };
 
-          const id = getDecode().id;
-
           const response = await axios.put(
             `${URL}/resources/${selectedRes.id}`,
             {
               language: resourceLanguage === "ru" ? "en" : "ru",
               name: resourceName,
-              image: uploadedImage,
+              image: image,
               link: resourceUri,
               description: resourceDescription,
               price_for_pub: Number(resourcePrice),
               login: resourceLogin,
               password: resourcePassword,
-
-              // login: resourceLogin
             },
             config
           );
@@ -263,15 +259,12 @@ export default function Mains() {
     }
   };
 
-  const handleUploadImage = async (e) => {
-    e.stopPropagation();
+  const handleUploadImage = async () => {
     const isEmpty = [...formDataISO.entries()].length;
-    // console.log(isEmpty);
-    // for (const [key, value] of formDataISO.entries()) {
-    //   console.log(key, value);
-    // }
     if (isEmpty) {
-      uploadFormData(formDataISO);
+      const image = await uploadFormData(formDataISO);
+      console.log(image.filename);
+      return image.filename;
     }
     // console.log("form ", formDataISO);
   };
@@ -550,7 +543,6 @@ export default function Mains() {
               className={styles.synchronization_btn}
               onClick={(e) => {
                 handleSynchronization(e);
-                // handleUploadImage(e);
               }}
               // style={statusEdit ? { display: "none" } : {}}
             >

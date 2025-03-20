@@ -20,6 +20,8 @@ export default function Settings() {
   const [profilePassword, setProfilePassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [exitStatus, setExitStatus] = useState(false);
+
   const URL = "https://prexpress.io";
 
   // const isWalletFormValid = address && token && login && password;
@@ -207,185 +209,227 @@ export default function Settings() {
   };
 
   return (
-    <div className={styles.cont_settings}>
-      <div className={styles.new_wallet_cont}>
-        <div className={styles.wallet_content}>
-          <div className={styles.wallet_first_line}>
-            <h1 className={styles.wallet_h1}>Новый кошелёк</h1>
-            <img
-              className={styles.wallet_plus}
-              src="\images\settings\plus.svg"
-            ></img>
-          </div>
-          <div className={styles.wallet_line}></div>
-          <form className={styles.wallet_form} onSubmit={handleUpdateWallet}>
-            <div className={styles.form_group}>
-              <input
-                type="text"
-                id="wallet"
-                placeholder="USDT TRC-20"
-                className={styles.input_field}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            <div className={styles.form_group}>
+    <>
+      <div className={styles.cont_settings}>
+        <div className={styles.new_wallet_cont}>
+          <div className={styles.wallet_content}>
+            <div className={styles.wallet_first_line}>
+              <h1 className={styles.wallet_h1}>Новый кошелёк</h1>
               <img
-                className={styles.info_token}
-                src="\images\settings\info_token.svg"
-              ></img>
-              <label className={styles.wallet_lable} htmlFor="token">
-                Токен
-              </label>
-              <input
-                type="text"
-                id="token"
-                placeholder="Такой-то"
-                className={styles.input_field}
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-              />
-            </div>
-            <div className={styles.form_group}>
-              <label className={styles.wallet_lable} htmlFor="login">
-                Логин
-              </label>
-              <input
-                type="text"
-                id="login"
-                placeholder="Login"
-                className={styles.input_field}
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
-              />
-            </div>
-            <div className={styles.form_group}>
-              <label className={styles.wallet_lable} htmlFor="password">
-                Пароль
-              </label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                className={styles.input_field}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit" className={styles.submit_button}>
-              Добавить кошелёк
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className={styles.right_side_settings}>
-        <div className={styles.profile_cont}>
-          <div className={styles.profile_content}>
-            <div className={styles.profile_first_line}>
-              <h1 className={styles.profile_h1}>Настройки профиля</h1>
-              <img
-                className={styles.profile_ico}
-                src="\images\settings\settings_ico.svg"
+                className={styles.wallet_plus}
+                src="\images\settings\plus.svg"
               ></img>
             </div>
-            <div className={styles.profile_line}></div>
-            <form
-              className={styles.profile_form}
-              // onSubmit={handleUpdateProfile}
-            >
-              <img className={styles.edit_ico}></img>
-              <div className={styles.input_cnt}>
+            <div className={styles.wallet_line}></div>
+            <form className={styles.wallet_form} onSubmit={handleUpdateWallet}>
+              <div className={styles.form_group}>
                 <input
-                  className={styles.profile_input}
-                  placeholder="Имя Фамилия"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  id="wallet"
+                  placeholder="USDT TRC-20"
+                  className={styles.input_field}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
-                <img
-                  className={styles.profile_ico}
-                  src="\images\settings\edit_new.svg"
-                ></img>
               </div>
-              <div className={styles.input_cnt}>
+              <div className={styles.form_group}>
+                <img
+                  className={styles.info_token}
+                  src="\images\settings\info_token.svg"
+                ></img>
+                <label className={styles.wallet_lable} htmlFor="token">
+                  Токен
+                </label>
                 <input
-                  className={styles.profile_input}
-                  placeholder="8 (888) 888 - 88 - 88"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  type="text"
+                  id="token"
+                  placeholder="Такой-то"
+                  className={styles.input_field}
+                  value={token}
+                  onChange={(e) => setToken(e.target.value)}
                 />
-                <img
-                  className={styles.profile_ico}
-                  src="\images\settings\edit_ico.svg"
-                ></img>
               </div>
-              <div className={styles.input_cnt}>
+              <div className={styles.form_group}>
+                <label className={styles.wallet_lable} htmlFor="login">
+                  Логин
+                </label>
                 <input
-                  className={styles.profile_input}
-                  placeholder="Эл. почта"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  id="login"
+                  placeholder="Login"
+                  className={styles.input_field}
+                  value={login}
+                  onChange={(e) => setLogin(e.target.value)}
                 />
-                <img
-                  className={styles.profile_ico}
-                  src="\images\settings\edit_ico.svg"
-                ></img>
               </div>
-              <div className={styles.input_cnt}>
+              <div className={styles.form_group}>
+                <label className={styles.wallet_lable} htmlFor="password">
+                  Пароль
+                </label>
                 <input
-                  className={styles.profile_input}
-                  placeholder="Пароль"
                   type="password"
-                  value={profilePassword}
-                  onChange={(e) => setProfilePassword(e.target.value)}
+                  id="password"
+                  placeholder="Password"
+                  className={styles.input_field}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <img
-                  className={styles.profile_ico}
-                  src="\images\settings\edit_ico.svg"
-                ></img>
               </div>
-              <div className={styles.input_cnt}>
-                <input
-                  className={styles.profile_input}
-                  placeholder="Повторить пароль"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <img
-                  className={styles.profile_ico}
-                  src="\images\settings\edit_ico.svg"
-                ></img>
-              </div>
-              <button
-                className={styles.change_btn}
-                onClick={(e) => updateProfile(e)}
-                type="submit"
-              >
-                Изменить
+              <button type="submit" className={styles.submit_button}>
+                Добавить кошелёк
               </button>
             </form>
           </div>
         </div>
-        <div className={styles.delete_cont}>
-          <button
-            className={styles.exit_btn}
-            onClick={() => {
-              Cookies.remove("token");
-              navigate("/");
-              console.log("exit");
-              console.log(Cookies.get("token"));
-            }}
-          >
-            Выйти
-          </button>
-          <button
-            className={styles.delete_btn}
-            onClick={(e) => handleRemoveProfile(e)}
-          >
-            Удалить профиль
-          </button>
+        <div className={styles.right_side_settings}>
+          <div className={styles.profile_cont}>
+            <div className={styles.profile_content}>
+              <div className={styles.profile_first_line}>
+                <h1 className={styles.profile_h1}>Настройки профиля</h1>
+                <img
+                  className={styles.profile_ico}
+                  src="\images\settings\settings_ico.svg"
+                ></img>
+              </div>
+              <div className={styles.profile_line}></div>
+              <form
+                className={styles.profile_form}
+                // onSubmit={handleUpdateProfile}
+              >
+                <img className={styles.edit_ico}></img>
+                <div className={styles.input_cnt}>
+                  <input
+                    className={styles.profile_input}
+                    placeholder="Имя Фамилия"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <img
+                    className={styles.profile_ico}
+                    src="\images\settings\edit_new.svg"
+                  ></img>
+                </div>
+                <div className={styles.input_cnt}>
+                  <input
+                    className={styles.profile_input}
+                    placeholder="8 (888) 888 - 88 - 88"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                  <img
+                    className={styles.profile_ico}
+                    src="\images\settings\edit_ico.svg"
+                  ></img>
+                </div>
+                <div className={styles.input_cnt}>
+                  <input
+                    className={styles.profile_input}
+                    placeholder="Эл. почта"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <img
+                    className={styles.profile_ico}
+                    src="\images\settings\edit_ico.svg"
+                  ></img>
+                </div>
+                <div className={styles.input_cnt}>
+                  <input
+                    className={styles.profile_input}
+                    placeholder="Пароль"
+                    type="password"
+                    value={profilePassword}
+                    onChange={(e) => setProfilePassword(e.target.value)}
+                  />
+                  <img
+                    className={styles.profile_ico}
+                    src="\images\settings\edit_ico.svg"
+                  ></img>
+                </div>
+                <div className={styles.input_cnt}>
+                  <input
+                    className={styles.profile_input}
+                    placeholder="Повторить пароль"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  <img
+                    className={styles.profile_ico}
+                    src="\images\settings\edit_ico.svg"
+                  ></img>
+                </div>
+                <button
+                  className={styles.change_btn}
+                  onClick={(e) => updateProfile(e)}
+                  type="submit"
+                >
+                  Изменить
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className={styles.delete_cont}>
+            <button
+              className={styles.exit_btn}
+              onClick={() => {
+                Cookies.remove("token");
+                navigate("/");
+                console.log("exit");
+                console.log(Cookies.get("token"));
+              }}
+            >
+              Выйти
+            </button>
+            <button
+              className={styles.delete_btn}
+              onClick={(e) => {
+                e.stopPropagation();
+                setExitStatus(true);
+              }}
+            >
+              Удалить профиль
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      {exitStatus ? (
+        <div
+          className={styles.bgr_cnt}
+          onClick={(e) => {
+            e.stopPropagation();
+            setExitStatus(false);
+          }}
+        >
+          <div className={styles.exit_cnt}>
+            <h1>Выход</h1>
+            <div className={styles.exit_line}></div>
+            <div className={styles.exit_content}>
+              <p>Вы уверены, что хотите удалить аккаунт?</p>
+              <div className={styles.exit_btn_cnt}>
+                <div
+                  className={styles.yes_btn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveProfile(e);
+                  }}
+                >
+                  Да
+                </div>
+                <div
+                  className={styles.no_btn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExitStatus(false);
+                  }}
+                >
+                  Нет
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
