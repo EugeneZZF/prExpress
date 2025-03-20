@@ -39,8 +39,8 @@ export default function Modal({
   //   console.error("Ошибка WebSocket:", error);
   // };
 
-  const URL = "https://prexpress.io";
-  // const URL = "localhost:8000";
+  // const URL = "https://prexpress.io";
+  const URL = "http://localhost:8000";
 
   useEffect(() => {
     fetch("https://ipapi.co/json/")

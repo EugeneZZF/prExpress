@@ -20,7 +20,8 @@ export default function Settings() {
   const [profilePassword, setProfilePassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const URL = "https://prexpress.io";
+  // const URL = "https://prexpress.io";
+  const URL = "http://localhost:8000";
 
   // const isWalletFormValid = address && token && login && password;
   // const isProfileFormValid =
@@ -53,7 +54,7 @@ export default function Settings() {
         };
 
         const response = await axios.post(
-          "http://api.prexpress.pro/Client/UpdateProfile",
+          "http://localhost:8000/Client/UpdateProfile",
           {
             name,
             phone,
