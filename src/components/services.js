@@ -3,8 +3,9 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 // import { jwtDecode } from "jwt-decode";
-const URL = "https://prexpress.io";
-// const URL = "http://localhost:8000";
+// const URL = "https://prexpress.io";
+export const URL = "http://localhost:8000/api/v1";
+// export const URL = "https://web:8000/api/v1";
 
 export function getDecode() {
   const accessToken = Cookies.get("token");
@@ -250,6 +251,30 @@ export async function notificationsSend(title, text, checkboxes) {
   }
 }
 
+export async function getPost(postId) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    const response = await axios.get(`${URL}/posts/${postId}`, config);
+
+    console.log("Post data:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Fetching Users Error:", error);
+  }
+}
+
 export async function getPosts(
   page = 1,
   size = 10,
@@ -288,6 +313,94 @@ export async function getPosts(
     return response.data.items;
   } catch (error) {
     console.error("Fetching Posts Error:", error);
+  }
+}
+
+export async function publishPost(post_id) {
+  const accessToken = Cookies.get("token");
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    const response = await axios.post(
+      `${URL}/posts/${post_id}/publish`,
+
+      config
+    );
+
+    console.log("Server Response:", response.data);
+
+    if (response.data.status) {
+      console.log("post published! ");
+    }
+  } catch (error) {
+    console.error("Registration Error:", error);
+  }
+}
+
+export async function updatePost(
+  description,
+  image,
+  name,
+  status,
+  author,
+  hashtags,
+  note
+) {
+  const accessTokens = Cookies.get("token");
+  const user_id = getDecode().id;
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${accessTokens}` },
+    };
+    const response = await axios.put(
+      `${URL}/users/${user_id}`,
+      {
+        description: description,
+        name: name,
+        image: image,
+        status: status,
+        author: author,
+        user_id: user_id,
+        hashtags: hashtags,
+        note: note,
+      },
+      config
+    );
+    console.log("Post successfully updated!", response.status);
+    return response.status;
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+  }
+}
+
+export async function getImage(filename) {
+  const accessToken = Cookies.get("token");
+
+  if (!accessToken) {
+    console.error("No access token found!");
+    return null;
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      responseType: "blob", // Указываем, что ожидаем бинарные данные
+    };
+
+    const response = await axios.get(`${URL}/image/${filename}`, config);
+
+    const imageUrl = window.URL.createObjectURL(response.data); // Получаем URL из blob
+    return imageUrl;
+  } catch (error) {
+    console.error("Fetching Image Error:", error);
+    return null;
   }
 }
 

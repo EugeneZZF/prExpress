@@ -20,6 +20,8 @@ import Dispatch from "./pages/Admin/Dispatch/Dispatch";
 import Posts from "./pages/Admin/Posts/Posts";
 import PostEdit from "./pages/Admin/PostEdit/PostEdit";
 import Stats from "./pages/Admin/Stats/Stats";
+import EditPostCatalog from "./pages/Catalog/CatalogD/EditPostCatalog";
+import MyDetails from "./pages/Mypub/MyDetails/MyDetails";
 
 function App() {
   return (
@@ -33,13 +35,19 @@ function App() {
           <Route path="/admin/resource" element={<ResourceAdmin />} />
           <Route path="/admin/dispatch" element={<Dispatch />} />
           <Route path="/admin/posts" element={<Posts></Posts>} />
-          <Route path="/admin/postedit" element={<PostEdit></PostEdit>} />
+          <Route
+            path="/admin/postedit/:postId"
+            element={<PostEdit></PostEdit>}
+          />
           <Route path="/admin/stats" element={<Stats />} />
-
+          <Route
+            path="/publication/postedit/:postId"
+            element={<EditPostCatalog />}
+          />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/post" element={<Post />} />
-          <Route path="/post/profit" element={<Profit />} />
+          <Route path="/post/profit/:postId" element={<Profit />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* <Route path='/resources' element={<Catalog/>} /> */}
           <Route path="/resources" element={<Mains />} />
@@ -47,6 +55,7 @@ function App() {
           {/* <Route path="/archive" element={<myArchive />} /> */}
           <Route path="/chat/:user_id" element={<Chat />} />
           <Route path="/publication" element={<Mypub />} />
+          <Route path="/publication/details" element={<MyDetails />} />
           <Route path="/test" element={<Test></Test>} />
         </Route>
       </Routes>

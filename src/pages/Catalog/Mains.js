@@ -4,7 +4,8 @@ import Checkbox from "../Landing/comp_landing/Checkbox";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { getDecode } from "../../components/services";
+import { getDecode, getImage } from "../../components/services";
+import { URL } from "../../components/services";
 
 import {
   deleteResource,
@@ -14,7 +15,9 @@ import {
 
 export default function Mains() {
   const accesstoken = Cookies.get("token");
-  const URL = "https://prexpress.io";
+  // const URL = "https://prexpress.io";
+
+  // const URL = "https://localhost:8000/api/v1";
 
   const [selectedRes, setSelectedRes] = useState({});
   const [statusRes, setStatusRes] = useState("");
@@ -75,17 +78,17 @@ export default function Mains() {
     setHoverStates((prev) => ({ ...prev, [id]: false }));
   };
 
-  const [resourceLogin, setResourceLogin] = useState("admin");
+  const [resourceLogin, setResourceLogin] = useState("adminuser415409");
   const [resourcePassword, setResourcePassword] = useState(
-    "Z5h4 nPwo nlXO xzbT vqfR 4dis"
+    "iZhT c9Sj zjHN ctW4 HAgu HmlL"
   );
   const [resourceUri, setResourceUri] = useState(
-    "https://ca82805-wordpress-oa7zo.tw1.ru"
+    "https://s-q5m5hmqfvvs9.eu1.wpsandbox.org"
   );
   const [resourcePrice, setResourcePrice] = useState("21");
   // const [resourceId, setResourceid] = useState("");
   // const [resourceWalletId, setResourceWalletId] = useState("usdt_trc20");
-  const [resourcetoken, setResourceToken] = useState("565");
+  // const [resourcetoken, setResourceToken] = useState("565");
   const [errors, setErrors] = useState({});
   const [selectedCategories, setSelectedCategorues] = useState([]);
   // const [error, setError] = useState(null);
@@ -106,6 +109,13 @@ export default function Mains() {
     return true;
   }
 
+  async function handleSelectedRes(rec) {
+    // await getImage(rec.im);
+    setSelectedRes(rec);
+    setStatusRes("edit");
+    setStatusEdit((prev) => !prev);
+  }
+
   const handleSynchronization = async (e) => {
     e.preventDefault();
     fetchResurce();
@@ -120,9 +130,9 @@ export default function Mains() {
       const response = await axios.post(
         `${URL}/resources/syncronize`,
         {
-          login: loginData.username,
-          password: loginData.password,
-          url: loginData.uri,
+          login: resourceLogin,
+          password: resourcePassword,
+          url: resourceUri,
         },
         config
       );
@@ -160,6 +170,7 @@ export default function Mains() {
 
       console.log("Server Response:", response.data);
     } catch (error) {
+      alert("Неверные логин/Ссылка на сайт/пароль!");
       console.error("Synchronization Error:", error);
     }
   };
@@ -204,12 +215,8 @@ export default function Mains() {
               price_for_pub: Number(resourcePrice),
               login: resourceLogin,
               password: resourcePassword,
-
               categories: categories,
-
               user_id: id,
-
-              // login: resourceLogin
             },
             config
           );
@@ -226,6 +233,8 @@ export default function Mains() {
               Accept: "application/json",
             },
           };
+
+          console.log("selected", selectedRes);
 
           const response = await axios.put(
             `${URL}/resources/${selectedRes.id}`,
@@ -246,6 +255,8 @@ export default function Mains() {
             { categories },
             config
           );
+
+          console.log(response_cat);
 
           console.log("Server Responseww:", response.data);
 
@@ -320,7 +331,7 @@ export default function Mains() {
 
       console.log(receiveds.items, "wall");
     } catch (error) {
-      console.error("Failed to fetch wallets:", error);
+      console.error("Failed to fetch Resurce:", error);
     }
   }
   useEffect(() => {
@@ -480,7 +491,7 @@ export default function Mains() {
             <p className={styles.lint_p_red}>стоимость включает комиссию 35%</p>
           </div>
           <form onSubmit={handleCreateResource}>
-            <div className={styles.link_site}>
+            {/* <div className={styles.link_site}>
               <p className={styles.lint_p}>Токен</p>
               <input
                 type="text"
@@ -489,7 +500,7 @@ export default function Mains() {
                 value={resourcetoken}
                 onChange={(e) => setResourceToken(e.target.value)}
               />
-            </div>
+            </div> */}
             <div className={styles.link_site}>
               <p className={styles.lint_p}>Логин</p>
               <input
@@ -586,7 +597,9 @@ export default function Mains() {
                     <div className={styles.card_line}></div>
                     <p className={styles.card_name}>{rec.name}</p>
                     <p className={styles.card_category}>
-                      {rec.categories?.[0]}
+                      {rec.categories?.length > 0 && (
+                        <span>{rec.categories[0].name}</span>
+                      )}
                     </p>
                     {rec.language === "ru" ? (
                       <img
@@ -642,7 +655,7 @@ export default function Mains() {
                           <div className={styles.info_card_cont}>
                             {rec.categories.map((categ, index) => (
                               <p key={index}>
-                                {categ}
+                                {categ.name}
                                 {index !== rec.categories.length - 1
                                   ? ","
                                   : "."}
@@ -672,10 +685,8 @@ export default function Mains() {
                       <a
                         className={styles.card_red}
                         onClick={() => {
-                          setSelectedRes(rec);
-                          setStatusRes("edit");
-                          setStatusEdit((prev) => !prev);
-                          console.log(rec, selectedRes);
+                          handleSelectedRes(rec);
+                          console.log(rec);
                         }}
                       >
                         <img

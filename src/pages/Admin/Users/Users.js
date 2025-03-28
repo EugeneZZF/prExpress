@@ -171,7 +171,9 @@ export default function Users() {
                             />
                           )}
                         </div>
-                        <p className={styles.user_status}>{"Не в сети"}</p>
+                        <p className={styles.user_status}>
+                          {user.is_active ? <>В сети</> : <>Не в сети</>}
+                        </p>
                         <div className={styles.user_prem_cont}>
                           <img
                             className={styles.user_prem_1}

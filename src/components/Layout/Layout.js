@@ -29,9 +29,9 @@ export default function Layout() {
     setUserToken(user_id);
     getUserObject(user_id.id);
 
-    const socket = new WebSocket(`wss://prexpress.io/ws/${user_id.id}`);
+    const socket = new WebSocket(`ws://localhost:80/api/v1/ws/${user_id.id}`);
 
-    socket.onopen = () => {
+    http: socket.onopen = () => {
       console.log("WebSocket подключен");
       socket.send("Привет, сервер!");
     };

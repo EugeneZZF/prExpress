@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import ReactQuill from "react-quill";
 import styles from "../../Post/Post.module.css";
 import "../../Post/quill.css";
-
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import axios from "axios";
+import { URL } from "../../../components/services.js";
 
 import {
   getDecode,
   getImage,
   getPost,
-  publishPost,
   updatePost,
 } from "../../../components/services.js";
-import { uploadFormData } from "../../Catalog/MainsServices.js";
+import { uploadFormData } from "../MainsServices.js";
 
-export default function PostEdit() {
+export default function EditPostCatalog() {
   const { postId } = useParams();
   const [unicOpen, setUnicOpen] = useState(false);
 
@@ -26,8 +26,8 @@ export default function PostEdit() {
     setVisibleCards((prev) => prev + 10);
   };
 
-  const [categoryCont, setCategoryCont] = useState(false);
-  const [shake, setShake] = useState(false);
+  //   const [categoryCont, setCategoryCont] = useState(false);
+  //   const [shake, setShake] = useState(false);
   const [activePost, setActivePost] = useState();
 
   const [unicCont, setUnicCont] = useState([]);
@@ -38,7 +38,6 @@ export default function PostEdit() {
 
   const [post_name, setPostName] = useState("");
   const [text, setText] = useState("");
-  const [reason, setReason] = useState("");
 
   const [formDataISO, setFormDataISO] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -161,7 +160,6 @@ export default function PostEdit() {
 
   async function fetchResourse(postId) {
     const post = await getPost(postId);
-
     const image = await getImage(post.image);
 
     console.log("POST", post);
@@ -172,26 +170,6 @@ export default function PostEdit() {
     console.log(postId);
     fetchResourse(postId);
   }, []);
-
-  // {
-  //   "name": "string",
-  //   "description": "string",
-  //   "image": "string",
-  //   "date": "string",
-  //   "user_id": 0,
-  //   "headers": [
-  //     {
-  //       "name": "string",
-  //       "resource_id": 0
-  //     }
-  //   ],
-  //   "addons": [
-  //     {
-  //       "name": "string",
-  //       "link": "string"
-  //     }
-  //   ]
-  // }
 
   const handleCreateResource = async () => {
     try {
@@ -218,22 +196,39 @@ export default function PostEdit() {
       console.log(hash);
       let image_post = "";
 
-      if (!uploadBoolean) {
+      if (uploadBoolean) {
         image_post = activePost.image;
       } else {
-        image_post = handleUploadImage();
+        image_post = await handleUploadImage();
       }
-
-      const update = updatePost(
+      console.log(
+        "ALL",
         text,
         image_post,
         post_name,
-        "published",
         author,
+        activePost.status,
+
         hashtags
       );
 
+      const note = "";
+
+      const update = await updatePost(
+        text,
+        image_post,
+        post_name,
+        activePost.status,
+        author,
+        hashtags,
+        note
+      );
+
       console.log("Server Response:", update);
+
+      if (update === 200) {
+        alert("Пост успешно обновлен!!!");
+      }
     } catch (error) {
       console.error("Create resource Error:", error);
     }
@@ -289,6 +284,7 @@ export default function PostEdit() {
             onChange={handleFileSelect}
           />
           <div className={styles.media_btn_cont}>
+            {/* <div className={styles.media_btn_cnt_close}></div> */}
             <div className={styles.media_btn_container}>
               <div className={styles.media_connect}>
                 <h1 className={styles.media_title}>Соц. сети:</h1>
@@ -302,7 +298,7 @@ export default function PostEdit() {
                           selectedMedia.includes(name) ? "_green" : ""
                         }.svg)`,
                       }}
-                      // onClick={() => toggleMedia(id, name)}
+                      //   onClick={() => toggleMedia(id, name)}
                     ></div>
                   ))}
                 </div>
@@ -323,7 +319,9 @@ export default function PostEdit() {
               </div>
             </div>
           </div>
-          <div className={styles.edit_media_btn_edit}>Имяпользовывыф</div>
+          {/* <div className={styles.edit_media_btn_edit}>
+            
+          </div> */}
         </div>
         <div className={styles.right_side_post}>
           <input
@@ -348,12 +346,7 @@ export default function PostEdit() {
               <button
                 className={styles.Unify}
                 onClick={() => {
-                  if (selectedCategory.length === 0) {
-                    setShake(true);
-                  } else {
-                    setUnicOpen(!unicOpen);
-                  }
-
+                  setUnicOpen(!unicOpen);
                   console.log(uploadedImage);
                 }}
               >
@@ -663,7 +656,6 @@ export default function PostEdit() {
                     ))}
               </div>
             </div>
-
             {/* className={`${styles.source} ${unicOpen ? styles.active : ""}`} */}
             {/* <button
               className={`${styles.chose_site} ${
@@ -708,7 +700,7 @@ export default function PostEdit() {
               unicOpen
                 ? {
                     transform: `translateY(${
-                      selectedCategory.length * 75.994
+                      selectedCategory.length + 1 * 75.994
                     }px)`,
                   }
                 : {}
@@ -718,6 +710,7 @@ export default function PostEdit() {
             onClick={(e) => {
               // navigate("/post/profit");
               e.preventDefault();
+              handleCreateResource();
             }}
             className={`${styles.next_btn_edit} ${
               unicOpen ? styles.active : ""
@@ -726,30 +719,27 @@ export default function PostEdit() {
               unicOpen
                 ? {
                     transform: `translateY(${
-                      selectedCategory.length * 75.994
+                      selectedCategory.length + 1 * 75.994
                     }px)`,
                   }
                 : {}
             }
           >
-            <textarea
+            {/* <textarea
               placeholder="Причина отказа"
               className={styles.text_area_edit}
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-            ></textarea>
-            <div className={styles.button_cont_edit}>
+            ></textarea> */}
+            <div className={styles.button_cont_edit_2}>
+              <button className={styles.cancel_btn_2}>Назад</button>
               <button
                 className={styles.publish_btn}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleCreateResource();
-                  alert("Пост успешно опубликован!");
                 }}
               >
-                Опубликовать
+                Обновить
               </button>
-              <button className={styles.cancel_btn}>Опубликовать</button>
             </div>
           </div>
         </div>

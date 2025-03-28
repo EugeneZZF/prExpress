@@ -1,11 +1,19 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  mode: "production",
   entry: "./src/index.js", // Входной файл приложения
   output: {
     filename: "bundle.js", // Имя выходного файла
     path: path.resolve(__dirname, "dist"), // Папка для выходного файла
+    clean: true, // Очистка папки перед новой сборкой
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // Создай этот файл в `src`
+    }),
+  ],
   resolve: {
     fallback: {
       stream: require.resolve("stream-browserify"),

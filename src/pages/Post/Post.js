@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { getResurceUser, uploadFormData } from "../Catalog/MainsServices";
 import axios from "axios";
 import { getDecode } from "../../components/services.js";
+import { URL } from "../../components/services.js";
 
 import DateTimePicker from "./DatePicker.js";
 
 export default function Post() {
+  const navigate = useNavigate();
   const [unicOpen, setUnicOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(false);
   const [received, setReceived] = useState([]);
@@ -36,6 +38,9 @@ export default function Post() {
   const [time, setTime] = useState({ hours: "12", minutes: "30" });
   const containerRef = useRef(null);
   const [selectedMedia, setSelectedMedia] = useState([]);
+
+  // КАТЕГОРИИ РЕСУРСА
+  const [activeRes, setActiveRes] = useState(-1);
 
   const mediaOptions = [
     { id: 1, name: "google" },
@@ -66,8 +71,6 @@ export default function Post() {
       matchVisual: false,
     },
   };
-
-  const navigate = useNavigate();
 
   const formats = [
     "header",
@@ -215,19 +218,19 @@ export default function Post() {
 
       const isoString = new Date(finalData).toISOString().slice(0, 16);
 
+      const categories = [
+        { id: 1, name: "Технологии" },
+        { id: 2, name: "Наука" },
+      ];
+
       const finalHeaders = unicCont
         .filter((item) => item.title && item.title.trim() !== "")
         .map((item) => ({
           name: item.title,
+
+          categories: item.activeCateg,
           resource_id: item.id,
         }));
-
-      // const finalAddons = unicCont
-      //   .filter((item) => !item.title || item.title.trim() === "")
-      //   .map((item) => ({
-      //     name: item.name,
-      //     link: item.id,
-      //   }));
 
       const hash = [];
       hash.push(...hashtags.split("#").filter((tag) => tag));
@@ -247,13 +250,10 @@ export default function Post() {
       };
       console.log(data);
 
-      const response = await axios.post(
-        `https://prexpress.io/posts/`,
-        data,
-        config
-      );
+      const response = await axios.post(`${URL}/posts/`, data, config);
 
       console.log("Server Response:", response.data);
+      navigate(`./profit/${response.data}`);
     } catch (error) {
       console.error("Create resource Error:", error);
     }
@@ -343,7 +343,14 @@ export default function Post() {
               </div>
             </div>
           </div>
-          <button className={styles.edit_media_btn}>
+          <button
+            className={styles.edit_media_btn}
+            onClick={(e) => {
+              e.stopPropagation();
+
+              navigate("/resources");
+            }}
+          >
             <p className={styles.edit_media_btn_p}>Редактировать ресурсы</p>
             <img
               className={styles.edit_media_img}
@@ -402,9 +409,63 @@ export default function Post() {
                   ></img>
                 </div>
                 <form className={styles.cont_resource_1}>
+                  <div
+                    className={`${styles.container_categpry_0} ${
+                      activeRes === 0 ? `${styles.active}` : ""
+                    }`}
+                  >
+                    {selectedCategory?.[0]?.categories?.map((categ, index) => (
+                      <div
+                        key={categ.id} // Используем id как ключ
+                        className={`${styles.categ_cnt} ${
+                          selectedCategory[0].activeCateg?.some(
+                            (active) => active.id === categ.id
+                          )
+                            ? styles.active
+                            : ""
+                        }`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          console.log(selectedCategory);
+                          setSelectedCategory((prevSelected) =>
+                            prevSelected.map((item) => {
+                              if (item.id === selectedCategory[0].id) {
+                                const updatedActiveCateg = item.activeCateg
+                                  ? item.activeCateg.some(
+                                      (active) => active.id === categ.id
+                                    )
+                                    ? item.activeCateg.filter(
+                                        (c) => c.id !== categ.id
+                                      ) // Удаляем, если уже есть
+                                    : [...item.activeCateg, categ] // Добавляем, если нет
+                                  : [categ];
+
+                                return {
+                                  ...item,
+                                  activeCateg: updatedActiveCateg,
+                                };
+                              }
+                              return item;
+                            })
+                          );
+                        }}
+                      >
+                        {categ.name} {/* Отображаем name вместо строки */}
+                      </div>
+                    ))}
+                  </div>
                   <div className={styles.name_res}>
                     <p className={styles.name_t}>Название ресурса</p>
-                    <div className={styles.name_i}>
+                    <div
+                      className={styles.name_i}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        console.log(selectedCategory);
+                        if (activeRes !== 0) {
+                          setActiveRes(0);
+                        } else setActiveRes(-1);
+                      }}
+                    >
                       {selectedCategory.length > 0 ? (
                         <>{selectedCategory[0].name}</>
                       ) : null}
@@ -422,12 +483,12 @@ export default function Post() {
                           : ""
                       }`}
                       placeholder="Заголовок ресурса"
-                      value={inputValues[selectedCategory[0]?.id] || ""} // Привязываем к состоянию
+                      value={inputValues[selectedCategory[0]?.id] || ""}
                       onChange={(e) => {
                         const value = e.target.value;
                         setInputValues((prev) => ({
                           ...prev,
-                          [selectedCategory[0]?.id]: value, // Сохраняем введённый текст
+                          [selectedCategory[0]?.id]: value,
                         }));
                       }}
                     />
@@ -438,20 +499,28 @@ export default function Post() {
                       onClick={(e) => {
                         e.preventDefault();
 
-                        if (
-                          selectedCategory.length > 0 &&
-                          !unicCont.some(
-                            (unic) => unic.id === selectedCategory[0].id
-                          )
-                        ) {
-                          setUnicCont((prev) => [
-                            ...prev,
-                            {
+                        if (selectedCategory.length > 0) {
+                          setUnicCont((prev) => {
+                            const existingIndex = prev.findIndex(
+                              (unic) => unic.id === selectedCategory[0].id
+                            );
+
+                            const updatedItem = {
                               id: selectedCategory[0].id,
                               name: selectedCategory[0].name,
-                              title: inputValues[selectedCategory[0].id] || "", // Берем заголовок из inputValues
-                            },
-                          ]);
+                              title: inputValues[selectedCategory[0].id] || "",
+                              activeCateg:
+                                selectedCategory[0]?.activeCateg || [],
+                            };
+
+                            if (existingIndex !== -1) {
+                              return prev.map((item, index) =>
+                                index === existingIndex ? updatedItem : item
+                              );
+                            } else {
+                              return [...prev, updatedItem];
+                            }
+                          });
                         }
                       }}
                     ></button>
@@ -476,12 +545,85 @@ export default function Post() {
                     ></button>
                   </div>
                 </form>
+
                 {Array.isArray(selectedCategory) &&
                   selectedCategory
                     .filter((cat) => cat.id !== selectedCategory[0].id)
-                    .map((cat) => (
-                      <form key={cat.id} className={styles.cont_resource}>
-                        <div className={styles.name_res}>
+                    .map((cat, index_cat) => (
+                      <form
+                        key={index_cat + 1}
+                        className={styles.cont_resource}
+                      >
+                        <div
+                          className={`${styles.container_categpry_0} ${
+                            activeRes === index_cat + 1
+                              ? `${styles.active}`
+                              : ""
+                          }`}
+                        >
+                          {cat?.categories?.map((categ, index) => (
+                            <div
+                              key={categ.id}
+                              className={`${styles.categ_cnt} ${
+                                cat.activeCateg?.some(
+                                  (active) => active.id === categ.id
+                                )
+                                  ? styles.active
+                                  : ""
+                              }`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedCategory((prevSelected) =>
+                                  prevSelected.map((item) => {
+                                    if (item.id === cat.id) {
+                                      const updatedActiveCateg =
+                                        item.activeCateg
+                                          ? item.activeCateg.some(
+                                              (active) => active.id === categ.id
+                                            )
+                                            ? item.activeCateg.filter(
+                                                (c) => c.id !== categ.id
+                                              ) // Удаляем, если уже есть
+                                            : [
+                                                ...item.activeCateg,
+                                                {
+                                                  id: categ.id,
+                                                  name: categ.name,
+                                                },
+                                              ] // Добавляем, если нет
+                                          : [
+                                              {
+                                                id: categ.id,
+                                                name: categ.name,
+                                              },
+                                            ];
+
+                                      return {
+                                        ...item,
+                                        activeCateg: updatedActiveCateg,
+                                      };
+                                    }
+                                    return item;
+                                  })
+                                );
+                              }}
+                            >
+                              {categ.name}
+                            </div>
+                          ))}
+                        </div>
+                        <div
+                          className={styles.name_res}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log(123123);
+                            if (activeRes === index_cat + 1) {
+                              setActiveRes(-1);
+                            } else {
+                              setActiveRes(index_cat + 1);
+                            }
+                          }}
+                        >
                           <div className={styles.name_i}>{cat.name}</div>
                         </div>
                         <div className={styles.name_res}>
@@ -493,6 +635,9 @@ export default function Post() {
                             }`}
                             placeholder="Заголовок ресурса"
                             value={inputValues[cat.id] || ""}
+                            onClick={() => {
+                              console.log("Юник", unicCont);
+                            }}
                             onChange={(e) =>
                               setInputValues((prev) => ({
                                 ...prev,
@@ -514,10 +659,11 @@ export default function Post() {
                                   id: cat.id,
                                   name: cat.name,
                                   title: inputValues[cat.id] || "", // Берем заголовок из input
+                                  activeCateg: cat.activeCateg || [], // Добавляем activeCateg
                                 };
 
                                 if (existingIndex !== -1) {
-                                  // Если уже есть, обновляем заголовок
+                                  // Если уже есть, обновляем
                                   const updatedList = [...prev];
                                   updatedList[existingIndex] = updatedItem;
                                   return updatedList;
@@ -551,7 +697,7 @@ export default function Post() {
                     ))}
               </div>
             </div>
-            {/* className={`${styles.source} ${unicOpen ? styles.active : ""}`} */}
+
             <button
               className={`${styles.chose_site} ${
                 shake ? styles.anim_shake : ""
@@ -633,7 +779,7 @@ export default function Post() {
             value={hashtags}
             onChange={(e) => setHashtags(e.target.value)}
           ></input>
-          <div className={styles.radioGroup}>
+          {/* <div className={styles.radioGroup}>
             <label className={styles.radioButton}>
               <input type="radio" />
               <span className={styles.customRadio}></span>
@@ -645,7 +791,7 @@ export default function Post() {
               <span className={styles.customRadio}></span>
               Случайное построение ссылок
             </label>
-          </div>
+          </div> */}
           <input
             className={`${styles.source} ${unicOpen ? styles.active : ""}`}
             placeholder="Ссылка на источник"
@@ -653,7 +799,7 @@ export default function Post() {
               unicOpen
                 ? {
                     transform: `translateY(${
-                      (selectedCategory.length - 1) * 75.994
+                      selectedCategory.length * 75.994
                     }px)`,
                   }
                 : {}
@@ -670,7 +816,7 @@ export default function Post() {
               unicOpen
                 ? {
                     transform: `translateY(${
-                      (selectedCategory.length - 1) * 75.994
+                      selectedCategory.length * 75.994
                     }px)`,
                   }
                 : {}
@@ -725,7 +871,7 @@ export default function Post() {
                       {/* <input></input> */}
                       <p className={styles.card_name}>{rec.name}</p>
                       <p className={styles.card_category}>
-                        {rec.categories?.[0]}
+                        {rec.categories[0]?.name}
                       </p>
                       {rec.language === "ru" ? (
                         <img

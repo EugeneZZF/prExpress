@@ -1,0 +1,119 @@
+.cont {
+  min-height: 1302px;
+  height: auto;
+  flex: 1;
+  display: flex;
+  /* justify-content: space-around; */
+  justify-content: center;
+  gap: 30px;
+  width: 1300px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+}
+
+.container {
+  width: 1300px;
+  height: 1088px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #e2e2e2;
+  background: #fff;
+
+  padding-top: 33px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+}
+.post_id {
+  color: #333;
+  font-family: Involve;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.header_post {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  margin-top: 40px;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.zagolovok_header {
+  width: 102px;
+}
+.count_res_cnt {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  width: 273px;
+}
+.count_img {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.count_res {
+  width: 40px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+  font-family: Involve;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sum_header {
+  width: 225px;
+}
+.date_header {
+  width: 229px;
+}
+
+.card_res {
+  width: 1220px;
+  height: 164px;
+  flex-shrink: 0;
+
+  border-radius: 20px;
+  background: #f9f9f9;
+
+  margin-top: 12px;
+  padding: 20px 30px;
+
+  color: #333;
+  font-family: Involve;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.card_res_first_line {
+  display: flex;
+  align-items: center;
+  height: 42px;
+}
+.card_res_name_cnt {
+  width: 375px;
+}
+.card_res_name {
+  width: 226px;
+}
+.card_res_sum {
+  width: 225px;
+}

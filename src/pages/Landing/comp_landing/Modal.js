@@ -4,6 +4,7 @@ import styles from "./Modal.module.css";
 import Checkbox from "./Checkbox";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { URL } from "../../../components/services";
 //
 
 export default function Modal({
@@ -17,7 +18,7 @@ export default function Modal({
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState("ru");
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
@@ -40,14 +41,14 @@ export default function Modal({
   // };
 
   // const URL = "https://prexpress.io";
-  const URL = "http://localhost:8000";
+  // const URL = "https://web:8000/api/v1";
 
-  useEffect(() => {
-    fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => setCountry(data.country))
-      .catch((error) => console.error("Error fetching country data:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://ipapi.co/json/")
+  //     .then((response) => response.json())
+  //     .then((data) => setCountry(data.country))
+  //     .catch((error) => console.error("Error fetching country data:", error));
+  // }, []);
 
   const handleRegistration = async (e) => {
     e.preventDefault();

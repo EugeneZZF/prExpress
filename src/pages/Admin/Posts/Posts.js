@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./Posts.module.css";
 import Checkbox from "../../Landing/comp_landing/Checkbox";
 import { getPosts } from "../../../components/services";
+import { useNavigate } from "react-router-dom";
 
 export default function Posts() {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [checkboxes, setCheckboxes] = useState({
     all: false,
@@ -42,6 +44,10 @@ export default function Posts() {
     const posts = await getPosts(1, 10, "", null, null, sort_by, "desc");
     setPosts(posts);
   }
+
+  const handleNavigatePost = (postId) => {
+    navigate(`/admin/postedit/${postId}`);
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -192,6 +198,10 @@ export default function Posts() {
                     <img
                       className={styles.actions_edit}
                       src="\images\admin\action_4.svg"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNavigatePost(post.id);
+                      }}
                     ></img>
                     <img
                       className={styles.actions_trash}

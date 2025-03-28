@@ -3,8 +3,8 @@ import { getDecode } from "../../components/services";
 import Cookies from "js-cookie";
 
 const accesstoken = Cookies.get("token");
-const URL = "https://prexpress.io";
-// const URL = "http://localhost:8000";
+
+const URL = "http://localhost:8000/api/v1";
 
 export function handleCreateId() {
   function s4() {
@@ -91,7 +91,7 @@ export async function getResurceUser(page = 1, size = 10, sort_order = "desc") {
       ...config,
     });
 
-    console.log("Server Response:", response.data);
+    console.log("Server Response res:", response.data);
 
     return response.data;
   } catch (error) {
